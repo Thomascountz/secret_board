@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Rails 5 app was created as an assignment from [The Odin Project](http://www,theodinproject.com).
 
-Things you may want to cover:
+This application is primarily a study in authentication and authrization using browser sessions and cookies, as well as TDD/BDD with RSpec and Capybara.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To run the app locally, clone this repo and install the gem dependencies:
+```
+bundle install --without production
+```
+Migrate the database:
+```
+rails db:install
+```
+Run RSpec:
+```
+rspec
+```
+Instantiate the server on your localhost:
+```
+rails server
+```
+Visit:
+```
+http://localhost:3000
+```
