@@ -33,4 +33,8 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
   
+  it 'is authenticated with valid password' do
+    expect(user.authenticate('password')).to eq(user)
+  end
+  
 end
