@@ -6,9 +6,9 @@ RSpec.describe "sessions/new.html.erb", type: :view do
 
     assert_select "form[action=?][method=?]", login_path, "post" do
 
-      assert_select "input#session_[name=?]", "email"
+      assert_select "[name=?]", "session[email]"
 
-      assert_select "input#session_[name=?]", "password"
+      assert_select "[name=?]", "session[password]"
     end
   end
 end
