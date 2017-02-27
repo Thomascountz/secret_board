@@ -11,5 +11,17 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe SessionsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+ let(:user) { User.create(name: 'Thomas Countz',
+                           email: 'thomascountz@gmail.com',
+                           password: 'password',
+                           password_confirmation: 'password') }
+                           
+                           
+  describe "login" do
+    it 'assigns a user.id to a browser session' do
+      log_in(user)
+      expect(session[:user_id]).to eq(user.id)
+    end
+  end
 end
