@@ -21,7 +21,7 @@ describe 'List of posts', type: :feature do
       end
     end
     
-    xit 'has a link to login' do
+    it 'has a link to login' do
       expect(page).to have_link('Login', href: login_path)
     end
     
@@ -58,7 +58,7 @@ describe 'List of posts', type: :feature do
       
     end
     
-    xit 'has a link to logout' do
+    it 'has a link to logout' do
       expect(page).to have_link("Logout", href: logout_path)
     end
   end
