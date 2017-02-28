@@ -2,6 +2,13 @@
 
 <% @posts.each do |post| %>
   <ul>
-    <li><%= post.body %> | <%= post.user.name %></li>
+    <li>
+      <%= post.body %> | 
+      <% if logged_in? %>
+        <%= post.user.name %> 
+      <% else %>
+        <%= "Anonymous" %>
+      <% end %>
+    </li>
   </ul>
 <% end %>
