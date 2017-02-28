@@ -52,10 +52,9 @@ describe 'List of posts', type: :feature do
       page.fill_in("Body", with: new_post)
       page.click_button("Submit Post")
       expect(current_path).to eq(root_path)
+      expect('.alert').to be_present 
       expect(page).to have_content(new_post)
       expect(page).to have_content(user.name)
-      
-      
     end
     
     it 'has a link to logout' do

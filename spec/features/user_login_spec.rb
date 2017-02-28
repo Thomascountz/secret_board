@@ -38,7 +38,7 @@ describe 'login', type: :feature do
       expect(current_path).to eq(root_path)
       expect('.alert').to be_present
       
-      visit logout_path
+      page.click_link("Logout")
       expect(current_path).to eq(root_path)
       expect('.alert').to be_present      
     end
