@@ -41,17 +41,20 @@ describe 'List of posts', type: :feature do
       expect(page).to have_content(user.name)
     end
     
-    xit 'has a link to create a new post' do
+    it 'has a link to create a new post' do
       expect(page).to have_link("New Post", href: new_post_path)
     end
     
-    xit 'adds a new post' do
+    it 'adds a new post' do
+      new_post = "This is post number four!"
       page.click_link("New Post")
-      page.fill_in("Body", with: "This is post number four!")
+      expect(current_path).to eq(new_post_path)
+      page.fill_in("Body", with: new_post)
       page.click_button("Submit Post")
-      expect(current_path).to eq(posts_path)
-      expect(page).to_have content("This is post number four!")
-      expect(page).to_have content(user.name)
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content(new_post)
+      expect(page).to have_content(user.name)
+      
       
     end
     

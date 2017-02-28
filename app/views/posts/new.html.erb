@@ -1,8 +1,7 @@
 <h1>New Post</h1>
 
 <%= form_for(@post) do |f| %>
-  <%= hidden_field_tag :user_id, @user.id %>
   <%= f.label :body %>
   <%= f.text_area :body %>
-  <%= f.submit "Sumbit Post" %>
+  <%= f.submit "Submit Post" %>
 <% end %>

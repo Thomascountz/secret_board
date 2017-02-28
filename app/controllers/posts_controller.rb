@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :get_user, only: [:new]
+  before_action :get_user, only: [:new, :create]
   
   def index
     @posts = Post.all
@@ -10,6 +10,15 @@ class PostsController < ApplicationController
   end
   
   def create
+    @post = Post.new
+    @post.body = params[:post][:body]
+    @post.user_id = current_user.id
+    if @post.save
+      flash[:success] = "Post created!"
+      redirect_to root_url
+    else
+      render 'new'
+    end
   end
   
   private
@@ -21,6 +30,10 @@ class PostsController < ApplicationController
         flash[:danger] = "You must be logged in."
         redirect_to login_path
       end
+    end
+    
+    def post_params
+      params.require(:post).permit(:body)
     end
 
 end

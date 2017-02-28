@@ -27,7 +27,7 @@ RSpec.describe PostsController, type: :controller do
     context 'when user is anonymous' do
       it 'redirects' do
         get :new, params: {}, session: nil
-        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(login_path)
       end
     end
     
@@ -44,5 +44,50 @@ RSpec.describe PostsController, type: :controller do
     end
   end
   
-  
+  describe 'POST #create' do
+    
+    context 'when user is anonymous' do
+      it 'redirects' do
+        post :create, params: { post: valid_post }, session: nil
+        expect(response).to redirect_to(login_path)
+      end
+    end
+
+    
+    context "when user is logged in" do
+      
+      context "with valid params" do
+        
+        it "creates a new Post" do
+          expect {
+            post :create, params: { post: valid_post }, session: valid_session
+          }.to change(Post, :count).by(1)
+        end
+        
+        it "assigns a newly created Post as @post" do
+          post :create, params: { post: valid_post }, session: valid_session
+          expect(assigns(:post)).to be_a(Post)
+          expect(assigns(:post)).to be_persisted
+        end
+        
+        it "redirects back to root url" do
+          post :create, params: { post: valid_post }, session: valid_session
+          expect(response).to redirect_to(root_path)
+        end
+      end
+      
+      context "with invalid params" do
+        
+        it "assigns a new created unsaved post as @post" do
+          post :create, params: { post: invalid_post }, session: valid_session
+          expect(assigns(:post)).to be_a_new(Post)
+        end
+        
+        it "rerenders the new template" do
+          post :create, params: { post: invalid_post }, session: valid_session
+          expect(response).to render_template("new")
+        end
+      end
+    end
+  end
 end
