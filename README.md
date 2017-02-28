@@ -4,7 +4,7 @@ This Rails 5 app was created to satisfy an assignment from [The Odin Project](ht
 
 ## What Does It Do?
 
-This application is primarily a study in authentication and authrization using browser sessions and cookies, as well as TDD/BDD with RSpec and Capybara.
+This application is primarily a study in authentication and authorization using browser sessions and cookies, as well as TDD/BDD with RSpec and Capybara.
 
 Secret Board allows unregistered users who visit the site to see a list of anonymous text-based posts. When a register user logs-in, that user can see the same posts and their authors, as well as create a new post themselves, which will be see as anonymously authored to nonregistered users.
 
