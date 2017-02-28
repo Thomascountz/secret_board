@@ -47,4 +47,13 @@ RSpec.describe SessionsHelper, type: :helper do
     end
   end
   
+  describe "log_out" do
+    it 'deletes the user_id from the browser sessions' do
+      log_in(user)
+      expect(session[:user_id]).to eq(user.id)
+      log_out
+      expect(session[:user_id]).to be nil
+    end
+  end
+  
 end
