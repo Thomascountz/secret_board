@@ -33,8 +33,12 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
   
+  it "is not authenticated with the wrong password" do
+    expect(user.authenticate("wrong password")).to be false
+  end
+  
   it 'is authenticated with valid password' do
-    expect(user.authenticate('password')).to eq(user)
+    expect(user.authenticate(user.password)).to eq(user)
   end
   
 end
