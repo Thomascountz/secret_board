@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :get_user, only: [:new]
+  
   def index
     @posts = Post.all
   end
