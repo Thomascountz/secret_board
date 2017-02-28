@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Post#index', type: :feature do
+describe 'List of posts', type: :feature do
   
   let(:user) { User.create(name: 'Thomas Countz',
                            email: 'thomascountz@gmail.com',
@@ -21,6 +21,10 @@ describe 'Post#index', type: :feature do
       end
     end
     
+    xit 'has a link to login' do
+      expect(page).to have_link('Login', href: login_path)
+    end
+    
     it 'does not render the name of the post author' do
       expect(page).to_not have_content(user.name)
       expect(page).to have_content('Anonymous')
@@ -28,12 +32,31 @@ describe 'Post#index', type: :feature do
   end
   
   context 'when user is signed in' do
-    it 'renders the name of the post author' do
-      
+    before(:each) do
       log_in_as(user)
-
       visit posts_path
+    end
+    
+    it 'renders the name of the post author' do
       expect(page).to have_content(user.name)
+    end
+    
+    xit 'has a link to create a new post' do
+      expect(page).to have_link("New Post", href: new_post_path)
+    end
+    
+    xit 'adds a new post' do
+      page.click_link("New Post")
+      page.fill_in("Body", with: "This is post number four!")
+      page.click_button("Submit Post")
+      expect(current_path).to eq(posts_path)
+      expect(page).to_have content("This is post number four!")
+      expect(page).to_have content(user.name)
+      
+    end
+    
+    xit 'has a link to logout' do
+      expect(page).to have_link("Logout", href: logout_path)
     end
   end
   
