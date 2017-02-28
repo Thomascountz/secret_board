@@ -29,7 +29,7 @@ describe 'login', type: :feature do
     end
   end
   
-  describe "with valid login information" do
+  describe "with valid login information followed by logout" do
     it 'rerenders the form with an alert message' do
       visit login_path
       page.fill_in('session_email', with: user.email)
@@ -37,6 +37,10 @@ describe 'login', type: :feature do
       page.click_button('Login')
       expect(current_path).to eq(root_path)
       expect('.alert').to be_present
+      
+      visit logout_path
+      expect(current_path).to eq(root_path)
+      expect('.alert').to be_present      
     end
   end
   
