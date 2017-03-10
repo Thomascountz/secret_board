@@ -15,6 +15,9 @@
           <span class="user">Posted by <%= "Anonymous" %></span>
         <% end %>
         <span class="timestamp"><%= time_ago_in_words(post.created_at) %> ago.</span>
+        <% if logged_in? && post.user_id == current_user.id %>
+          <span class="delete"><%= link_to "delete", post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        <% end %>
       </li>
     </ul>
     

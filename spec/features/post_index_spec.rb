@@ -7,6 +7,11 @@ describe 'List of posts', type: :feature do
                            password: 'password',
                            password_confirmation: 'password') }
                            
+  let(:new_user) { User.create(name: 'Chris Smith',
+                           email: 'chrissmith@gmail.com',
+                           password: 'password',
+                           password_confirmation: 'password') }
+                           
   before(:each) do
     user.posts.create(body: "This is post number one!")
     user.posts.create(body: "This is post number two!")
@@ -25,9 +30,10 @@ describe 'List of posts', type: :feature do
       expect(page).to have_link('Login', href: login_path)
     end
     
-    it 'does not render the name of the post author' do
+    it 'does not render the name of the post author or delete option' do
       expect(page).to_not have_content(user.name)
       expect(page).to have_content('Anonymous')
+      expect(page).to_not have_content('delete')
     end
   end
   
@@ -38,7 +44,9 @@ describe 'List of posts', type: :feature do
     end
     
     it 'renders the name of the post author' do
-      expect(page).to have_content(user.name)
+      user.posts.each do |post|
+        expect(page).to have_content(post.user.name)
+      end
     end
     
     it 'has a link to create a new post' do
@@ -61,7 +69,7 @@ describe 'List of posts', type: :feature do
       expect(page).to have_link("Logout", href: logout_path)
     end
     
-    it 'has a link to delete the post' do
+    it 'has a link to delete each post' do
       user.posts.each do |post|
         expect(page).to have_link('delete', href: post_path(post))
       end
@@ -83,6 +91,27 @@ describe 'List of posts', type: :feature do
       expect(page).not_to have_content(post)
       expect(current_path).to eq(root_path)
     end
+    
+  end
+  
+  context "when signed in as a different user" do
+    before(:each) do
+      log_in_as(new_user)
+      visit posts_path
+    end
+    
+    it 'it renders the name of the post authors' do
+      user.posts.each do |post|
+        expect(page).to have_content(post.user.name)
+      end
+    end
+    
+    it 'does not have a link to delete each post of the other user' do
+      user.posts.each do |post|
+        expect(page).not_to have_link('delete', href: post_path(post))
+      end
+    end
+
     
   end
   

@@ -21,6 +21,18 @@ class PostsController < ApplicationController
     end
   end
   
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.user == current_user
+      @post.destroy
+      redirect_to(root_path)
+    else
+      flash[:danger] = "You may only delete your own posts!"
+      redirect_to(root_path)
+    end
+    
+  end
+  
   private
   
     def get_user
