@@ -60,6 +60,30 @@ describe 'List of posts', type: :feature do
     it 'has a link to logout' do
       expect(page).to have_link("Logout", href: logout_path)
     end
+    
+    it 'has a link to delete the post' do
+      user.posts.each do |post|
+        expect(page).to have_link('delete', href: post_path(post))
+      end
+    end
+    
+    it 'deletes a post' do
+      post = "This is a brand new post!"
+      
+      page.click_link("New Post")
+      page.fill_in("Body", with: post)
+      page.click_button("Submit Post")
+      
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content(post)
+      
+      delete_links = page.all("a", :text => "delete")
+      delete_links.first.click
+      
+      expect(page).not_to have_content(post)
+      expect(current_path).to eq(root_path)
+    end
+    
   end
   
   private

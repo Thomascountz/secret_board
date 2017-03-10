@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new
-    @post.body = params[:post][:body]
+    @post.body = params[:post][:body] # Why don't I need strong params here?
     @post.user_id = current_user.id
     if @post.save
       flash[:success] = "Post created!"

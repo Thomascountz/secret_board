@@ -90,4 +90,30 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
+  
+  describe 'DELETE #destroy' do
+    
+    context 'when user is anonymous' do
+      it 'redirects' do
+        post = Post.create! valid_post
+        delete :destroy, params: {id: post.to_param}, session: valid_session
+        expect(response).to redirect_to(login_path)
+      end
+    end
+    
+    context 'when user is logged in' do
+      it "destorys the requested post" do
+        post = Post.create! valid_post
+        expect {
+          delete :destroy, params: {id: post.to_param }, session: valid_session
+        }.to change(Post, :count).by(-1)
+      end
+      
+      it "redirects to root" do
+        post = Post.create! valid_post
+        delete :destroy, params: {id: post.to_param }, session: valid_session
+        expect(response).to redirect_to(root_url)
+      end
+    end
+  end
 end
