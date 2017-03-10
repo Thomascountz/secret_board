@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SecretBoard</title>
+    <title>Secret Board</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -10,10 +10,14 @@
 
   <body>
     <div class="container">
+      <%= render 'shared/header' %>
+      
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: 'alert') %>
       <% end %>
+      
       <%= yield %>
+      
       <%= debug(params) if Rails.env.development? %>
     </div>
   </body>
