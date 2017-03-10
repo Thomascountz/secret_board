@@ -12,9 +12,11 @@
     <div class="container">
       <%= render 'shared/header' %>
       
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: 'alert') %>
-      <% end %>
+      <div class="container">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
+      </div>
       
       <%= yield %>
       

@@ -6,3 +6,31 @@
 body { 
   padding-top: 70px;
 }
+
+h1 {
+  text-align: center;
+  font-size: 5em;
+}
+
+
+/* posts */
+
+.post {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user {
+   margin-top: 5em;
+   padding-top: 0;
+  }
+  .content {
+    display: block;
+    color: $brand-primary;
+  }
+  .timestamp {
+    color: $gray-light;
+  }
+}

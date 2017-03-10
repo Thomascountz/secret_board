@@ -1,16 +1,22 @@
 <h1>Post Board</h1>
+<div class="container">
+  <%= link_to "New Post", new_post_path, class: "btn btn-primary btn-block" %>
+</div>
 
-<% @posts.each do |post| %>
-  <ul>
-    <li>
-      <%= post.body %> | 
-      <% if logged_in? %>
-        <%= post.user.name %> 
-      <% else %>
-        <%= "Anonymous" %>
-      <% end %>
-    </li>
-  </ul>
-<% end %>
-
-<%= link_to "New Post", new_post_path %>
+<div class="container">
+  <% @posts.each do |post| %>
+  
+    <ul class="post">
+      <li id="post-<%= post.id %>">
+        <span class="content"><h2><%= post.body %><h2></h2></span>
+        <% if logged_in? %>
+          <span class="user">Posted by <%= post.user.name %></span>
+        <% else %>
+          <span class="user">Posted by <%= "Anonymous" %></span>
+        <% end %>
+        <span class="timestamp"><%= time_ago_in_words(post.created_at) %> ago.</span>
+      </li>
+    </ul>
+    
+  <% end %>
+</div>
