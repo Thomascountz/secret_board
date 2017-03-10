@@ -90,6 +90,7 @@ describe 'List of posts', type: :feature do
       
       expect(page).not_to have_content(post)
       expect(current_path).to eq(root_path)
+      exect('.alert').to be_present
     end
     
   end

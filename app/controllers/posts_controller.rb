@@ -25,6 +25,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.user == current_user
       @post.destroy
+      flash[:success] = "Your post has been deleted!"
       redirect_to(root_path)
     else
       flash[:danger] = "You may only delete your own posts!"
