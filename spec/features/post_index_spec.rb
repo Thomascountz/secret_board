@@ -30,6 +30,10 @@ describe 'List of posts', type: :feature do
       expect(page).to have_link('Login', href: login_path)
     end
     
+    it 'has a link to signup' do
+      expect(page).to have_link('Sign up', href: signup_path)
+    end
+    
     it 'does not render the name of the post author or delete option' do
       expect(page).to_not have_content(user.name)
       expect(page).to have_content('Anonymous')
@@ -90,7 +94,7 @@ describe 'List of posts', type: :feature do
       
       expect(page).not_to have_content(post)
       expect(current_path).to eq(root_path)
-      exect('.alert').to be_present
+      expect('.alert').to be_present
     end
     
   end

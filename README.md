@@ -30,3 +30,11 @@ Visit:
 ```
 http://localhost:3000
 ```
+
+# TODO
+* Validate user email uniqueness 
+* Index user email in db
+* Add callback for signup to prevent logged in users from accessing signup form
+* Add test for login link on signup page
+* Add test for signup link on login page
+* Add user delete functionality

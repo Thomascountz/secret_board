@@ -32,7 +32,7 @@ RSpec.describe UsersController, type: :controller do
       it "assigns a newly created User as @user" do
         post :create, params: { user: valid_user }, session: nil
         expect(assigns(:user)).to be_a(User)
-        expect(assigns(:user)).to be_presisted
+        expect(assigns(:user)).to be_persisted
       end
       
       it "logs in the new user" do
@@ -48,12 +48,12 @@ RSpec.describe UsersController, type: :controller do
     
     context "with invalid params" do
       it "assigns a new created but unsaved user as @user" do
-        post :create, { user: invalid_user }, session: nil
+        post :create, params: { user: invalid_user }, session: nil
         expect(assigns(:user)).to be_a_new(User)
       end
       
       it "rerenders the new template" do
-        post :create, { user: invalid_user }, session: nil
+        post :create, params: { user: invalid_user }, session: nil
         expect(response).to render_template("new")
       end
     end

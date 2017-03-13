@@ -20,8 +20,7 @@ describe 'User sign up', type: :feature do
       expect{
         page.click_button 'Sign up'
       }.to change(User, :count).by(0)
-      expect(current_path).to eq(new_user_path)
-      exect('.alert').to be_present
+      expect('.alert').to be_present
     end
   end
   
@@ -35,7 +34,7 @@ describe 'User sign up', type: :feature do
         page.click_button 'Sign up'
       }.to change(User, :count).by(1)
       expect(current_path).to eq(root_path)
-      exect('.alert').to be_present
+      expect('.alert').to be_present
     end
   end
   
