@@ -23,27 +23,45 @@ RSpec.describe UsersController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       
-      xit "creates a new user" do
+      it "creates a new user" do
         expect {
           post :create, params: { user: valid_user }, session: nil
         }.to change(User, :count).by(1)
       end
       
-      xit "assigns a newly created User as @user" do
-        
+      it "assigns a newly created User as @user" do
+        post :create, params: { user: valid_user }, session: nil
+        expect(assigns(:user)).to be_a(User)
+        expect(assigns(:user)).to be_presisted
       end
-      xit "redirects to root url" do
-        
+      
+      it "logs in the new user" do
+        post :create, params: { user: valid_user }, session: nil
+        expect(is_logged_in?).to be true
+      end
+      
+      it "redirects to root url" do
+        post :create, params: { user: valid_user }, session: nil
+        expect(response).to redirect_to(root_url)
       end
     end
     
     context "with invalid params" do
-      xit "assigns a new created but unsaved user as @user" do
-        
+      it "assigns a new created but unsaved user as @user" do
+        post :create, { user: invalid_user }, session: nil
+        expect(assigns(:user)).to be_a_new(User)
       end
-      xit "rerenders the new template" do
-        
+      
+      it "rerenders the new template" do
+        post :create, { user: invalid_user }, session: nil
+        expect(response).to render_template("new")
       end
     end
+    
+  end
+  
+  # Returns true if a user is logged in
+  def is_logged_in? 
+    !session[:user_id].nil?
   end
 end

@@ -16,13 +16,12 @@ describe 'User sign up', type: :feature do
       page.fill_in('Name', with: "u")
       page.fill_in('Email', with: "user@invalid")
       page.fill_in('Password', with: "password1")
-      page.fill_in('Password Confirmation', with: "different_password")
-      page.click_button('Sign up')
+      page.fill_in('Password confirmation', with: "different_password")
+      expect{
+        page.click_button 'Sign up'
+      }.to change(User, :count).by(0)
       expect(current_path).to eq(new_user_path)
       exect('.alert').to be_present
-      expect{
-        click_button 'Sign up'
-      }.to_not change(User, :count).by(1)
     end
   end
   
@@ -31,13 +30,12 @@ describe 'User sign up', type: :feature do
       page.fill_in('Name', with: user.name)
       page.fill_in('Email', with: user.email)
       page.fill_in('Password', with: user.password)
-      page.fill_in('Password Confirmation', with: user.password_confirmation)
-      page.click_button('Sign up')
+      page.fill_in('Password confirmation', with: user.password_confirmation)
+      expect{
+        page.click_button 'Sign up'
+      }.to change(User, :count).by(1)
       expect(current_path).to eq(root_path)
       exect('.alert').to be_present
-      expect{
-        click_button 'Sign up'
-      }.to change(User, :count).by(1)
     end
   end
   
