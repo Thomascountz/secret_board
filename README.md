@@ -1,6 +1,6 @@
 # Secret Board
 
-This Rails 5 app was created to satisfy an assignment from [The Odin Project](http://www,theodinproject.com).
+A Rails 5 CRUD app built while working through [The Odin Project](http://www,theodinproject.com).
 
 ## What Does It Do?
 
